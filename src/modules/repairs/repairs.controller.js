@@ -1,4 +1,4 @@
-import { RepairService } from "./repairs.services.js"
+import { RepairService } from "./repairs.service.js"
 
 export const findAllRepairs = async(req,res) => {
    try{
