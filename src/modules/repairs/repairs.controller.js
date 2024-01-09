@@ -29,43 +29,15 @@ export const createRepair = async(req,res) => {
    }
 }
 
-export const findOneRepair = async(req,res) => {
-   try{
-
-    const { id } = req.params
-
-    const repair = await RepairService.findOne(id)
-
-    if(!repair){
-        return res.status(404).json({
-            status: 'error',
-            message: 'repair not found'
-        })
-    }
-
+export const findOneRepair = catchAsync(async (req, res) => {
+    const { repair } = req
+   
     return res.status(200).json(repair)
-
-   } catch(error){
-    return res.status(500).json({
-        status: 'fail',
-        message: 'Something went very wrong! XD'
-    })
-   }
-}
+})    
 
 export const updateRepair = async(req,res) => {
    try{
-    const { id } = req.params
-
-    const repair = await RepairService.findOne(id)
-
-    if(!repair){
-        return res.status(404).json({
-            status: 'error',
-            message: 'repair not found'
-        })
-    }
-
+  
     const repairUpdate = await RepairService.update(repair)
 
     return res.status(200).json(repairUpdate)
@@ -80,23 +52,8 @@ export const updateRepair = async(req,res) => {
 
 export const deleteRepair = async (req,res) => {
    try{
-    const { id } = req.params
+   const { repair } = req
 
-    const repair = await RepairService.findOne(id, ['pending', 'completed'] )
-
-    if(repair?.status === 'completed'){
-        return res.status(400).json({
-        status: 'error',
-        message: 'the repair has been already completed'
-        })
-    }
-
-    if(!repair){
-        return res.status(404).json({
-            status: 'error',
-            message: 'repair not found'
-        })
-    }
     await RepairService.delete(repair)
 
     return res.status(204).json(null)
