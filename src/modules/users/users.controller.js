@@ -1,6 +1,6 @@
 import { AppError } from '../../common/errors/appError.js'
 import { catchAsync } from '../../common/errors/catchAsync.js'
-import { encryptedPassword, verifyPassword } from '../../config/plugins/encripted-password.plugin.js'
+import { encryptedPassword, verifyPassword } from '../../config/plugins/encripted-password.js'
 import { generateJWT } from '../../config/plugins/generate-jwt.plugin.js'
 import { validateLogin, validatePartialUser, validateUser } from './user.schema.js'
 import { UserService } from './user.service.js'
